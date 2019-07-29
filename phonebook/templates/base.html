@@ -1,0 +1,91 @@
+{% load i18n static %}<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}{{ title }} | {{ site_title|default:_('Phonebook') }}{% endblock %}</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link rel="stylesheet" href={% static 'styles/style.css' %} />
+  <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+  <script src="https://kit.fontawesome.com/561622218f.js"></script>
+  {% block extrastyle %}{% endblock %}
+  {% block extrahead %}{% endblock %}
+  {% block responsive %}
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  {% endblock %}
+  {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE">{% endblock %}
+</head>
+{% load i18n %}
+
+<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
+  data-admin-utc-offset="{% now "Z" %}">
+
+  <!-- Container -->
+  <div id="container">
+
+      {% if not is_popup %}
+      <!-- Header -->
+      <div id="header">
+          <div id="branding">
+            {% block branding %}
+            <nav class="navbar navbar-light bg-style mx-auto">
+              <div class="container">
+                <a class="navbar-brand" id="site-name" href={% url 'index' %}>
+                  <img src={% static 'images/logo.png' %} width="30" height="30" class="rounded" alt="Phonebook logo" />
+                  {{ site_header|default:_('Phonebook') }}
+                </a>
+
+                <div class="mr-auto">
+                  {% block breadcrumbs %}
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb d-inline-flex py-1 my-1 bg-style">
+                      <li class="breadcrumb-item"><a class="" href="{% url 'index' %}">{% trans 'Home' %}</a></li>
+                      <li class="breadcrumb-item active">{% if title %}{{ title }}{% endif %}</li>
+                    </ol>
+                  </nav>
+                  {% endblock %}
+                </div>
+              </div>
+            </nav>
+            {% endblock %}
+          </div>
+          {% block nav-global %}{% endblock %}
+      </div>
+      <!-- END Header -->
+      {% endif %}
+
+      {% block messages %}
+          {% if messages %}
+          <ul class="messagelist">{% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
+          {% endfor %}</ul>
+          {% endif %}
+      {% endblock messages %}
+
+      <!-- Content -->
+      <div id="content" class="{% block coltype %}colM{% endblock %}">
+        
+          {% block pretitle %}{% endblock %}
+          {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
+          <div class="container">
+          {% block content %}
+          </div>
+          {% block object-tools %}{% endblock %}
+          {{ content }}
+          {% endblock %}
+          {% block sidebar %}{% endblock %}
+          <br class="clear">
+        
+      </div>
+      <!-- END Content -->
+
+      {% block footer %}<div id="footer"></div>{% endblock %}
+  </div>
+  <!-- END Container -->
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  {% block extrascripts %}{% endblock %}
+</body>
+</html>

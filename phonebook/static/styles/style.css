@@ -1,0 +1,28 @@
+.rounded {
+  border-radius: 1rem !important;
+}
+
+.active {
+  color: #4d6066 !important;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: ">" !important;
+  color: #4d6066;
+}
+
+.bg-style {
+  background-color: #FFFE7E !important;
+}
+
+body {
+  color: #002517;
+}
+
+a {
+  color: #1e824c;
+}
+
+a:hover, a:focus {
+  color: #4b7b4b;
+}

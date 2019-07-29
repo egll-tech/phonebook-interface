@@ -1,0 +1,18 @@
+#googlemaps { 
+  width: 100%; 
+  position: absolute; 
+  z-index: 0;
+}
+
+#filter {
+  position: relative; 
+  z-index: 1;
+}
+
+.card-img {
+  width: 100%;
+}
+
+.card-title {
+  text-shadow: 1px 1px black;
+}

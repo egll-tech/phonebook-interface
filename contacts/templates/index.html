@@ -1,0 +1,61 @@
+{% extends "base_contacts.html" %}
+
+{% block pretitle %}
+    
+    <section class="jumbotron h-75">
+        <div class="container">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    Filters
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        {% comment %} <div id="googlemaps" class="h-75"></div> {% endcomment %}
+    </section>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+    {% if contacts_list %}
+        {% for contact in contacts_list %}
+            <div class="col-md-4 col-sm-6 mb-5">
+                <div class="card">
+                    <img class="card-img" src="https://loremflickr.com/200/200/face/all?random={{contact.id}}" alt="{{ contact.name | safe}} picture" />
+                    <div class="card-img-overlay text-white">
+                        <h4 class="card-title">{{ contact.name }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-middle"><i class="fas fa-phone-square-alt fa-lg"></i> {{ contact.phone_number}}</p>
+                        <p><i class="fas fa-map-marked-alt fa-lg"></i>{{ contact.address}}</p>
+                    </div>
+                </div>
+            </div>
+            {% comment %} <li><a href="/{{ contact.id }}/">{{ contact.name }}</a></li> {% endcomment %}
+        {% endfor %}
+    {% else %}
+        <p>No polls are available.</p>
+    {% endif %}
+    </div>
+{% endblock %}
+
+{% block extrascripts %}
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('googlemaps'), {
+            center: {lat: 0, lng: 0},
+            zoom: 4,
+            streetViewControl: false,
+            mapTypeControl: false,
+            fullscreenControl: false
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCS02tQl70x2n9kHw5w6XkFNxkdP_bJa_Q&callback=initMap"
+    async defer></script>
+{% endblock %}
