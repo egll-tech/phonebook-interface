@@ -16,7 +16,7 @@
                                 <input id="phone_number" name="phone_number" type="text" class="form-control" placeholder="Phone number contains" value="{{ search_phone_number |default_if_none:""  }}">
                             </div>
                             <div class="col">
-                                <input id="phone_number" name="phone_number" type="text" class="form-control" placeholder="Address contains" value="{{ search_address |default_if_none:""  }}">
+                                <input id="address" name="address" type="text" class="form-control" placeholder="Address contains" value="{{ search_address |default_if_none:""  }}">
                             </div>
                             <button class="btn btn-primary" type="submit">
                                 <i class="fas fa-search"></i>
@@ -46,19 +46,59 @@
                         <h4 class="card-title">{{ contact.name }}</h4>
                     </div>
                     <div class="card-body">
-                        <p class="text-middle"><i class="fas fa-phone-square-alt fa-lg"></i> {{ contact.phone_number}}</p>
-                        <p><i class="fas fa-map-marked-alt fa-lg"></i>{{ contact.address}}</p>
+                        <div class="row">
+                            <div class="col-2 align-self-center">
+                                <i class="fas fa-phone-square-alt fa-lg"></i>
+                            </div>
+                            <div class="col-10">
+                                <a href="tel:{{ contact.phone_number }}">
+                                    {{ contact.phone_number }}
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-2 align-self-center">
+                                <i class="fas fa-map-marked-alt fa-lg"></i>
+                            </div>
+                            <div class="col-10">
+                                <address>{{ contact.address }}</address>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         {% endfor %}
     {% else %}
-        <p>No polls are available.</p>
+        <div class="text-center mx-auto active">
+            <i class="far fa-sad-tear fa-5x"></i>
+            <p>No contacts found</p>
+        </div>
     {% endif %}
     </div>
 {% endblock %}
 
 {% block extrascripts %}
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('googlemaps'), {
+            center: {lat: 0, lng: 0},
+            zoom: 4,
+            streetViewControl: false,
+            mapTypeControl: false,
+            fullscreenControl: false,
+            zoomControl: false,
+        });
+      }
+
+      window.onload = function() {
+          initMap();
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCS02tQl70x2n9kHw5w6XkFNxkdP_bJa_Q&callback=initMap"
+    async defer></script>
+
     <script>
         $("form").submit(function() {
             console.log("working!");
@@ -68,19 +108,6 @@
         
 
         $( "form" ).find( ":input" ).prop( "disabled", false );
+        
     </script>
-    <script>
-      var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('googlemaps'), {
-            center: {lat: 0, lng: 0},
-            zoom: 4,
-            streetViewControl: false,
-            mapTypeControl: false,
-            fullscreenControl: false
-        });
-      }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCS02tQl70x2n9kHw5w6XkFNxkdP_bJa_Q&callback=initMap"
-    async defer></script>
 {% endblock %}
