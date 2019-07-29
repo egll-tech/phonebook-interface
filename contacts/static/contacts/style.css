@@ -1,11 +1,23 @@
-#googlemaps { 
-  width: 100%; 
-  position: absolute; 
+.navbar {
+  -webkit-box-shadow: 0 8px 6px -6px black;
+  -moz-box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0 8px 6px -6px black;
+}
+
+#content > .jumbotron {
+  -webkit-box-shadow: inset 0 -8px 6px -6px black;
+  -moz-box-shadow: inset 0 -8px 6px -6px black;
+  box-shadow: inset 0 -8px 6px -6px black;
+}
+
+#googlemaps {
+  width: 100%;
+  position: absolute;
   z-index: 0;
 }
 
 #filter {
-  position: relative; 
+  position: relative;
   z-index: 1;
 }
 

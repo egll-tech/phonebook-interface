@@ -1,29 +1,42 @@
 {% extends "base_contacts.html" %}
 
 {% block pretitle %}
-    
-    <section class="jumbotron h-75">
+    <div class="jumbotron">
         <div class="container">
-            <div class="card shadow-sm">
-                <div class="card-header">
-                    Filters
-                </div>
+            <div class="card shadow-lg mt-5">
                 <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <form>
+                    <div class="form-row">
+                        <div class="col">
+                            <input id="name" name="name" type="text" class="form-control" placeholder="Name contains" value="{{ search_name |default_if_none:""  }}">
+                        </div>
+                        <div class="col">
+                            <input id="phone_number" name="phone_number" type="text" class="form-control" placeholder="Phone number contains" value="{{ search_phone_number |default_if_none:""  }}">
+                        </div>
+                        <div class="col">
+                            <input id="phone_number" name="phone_number" type="text" class="form-control" placeholder="Address contains" value="{{ search_address |default_if_none:""  }}">
+                        </div>
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search"></i>
+                            Search
+                        </button>
+                    </div>
+                    </form>
                 </div>
             </div>
         </div>
         {% comment %} <div id="googlemaps" class="h-75"></div> {% endcomment %}
-    </section>
+    </div>
+{% endblock %}
+
+{% block content_title %}
 {% endblock %}
 
 {% block content %}
     <div class="row">
     {% if contacts_list %}
         {% for contact in contacts_list %}
-            <div class="col-md-4 col-sm-6 mb-5">
+            <div class="col-md-3 col-sm-6 mb-5">
                 <div class="card">
                     <img class="card-img" src="https://loremflickr.com/200/200/face/all?random={{contact.id}}" alt="{{ contact.name | safe}} picture" />
                     <div class="card-img-overlay text-white">
@@ -45,6 +58,16 @@
 
 {% block extrascripts %}
     <script>
+        $("form").submit(function() {
+            console.log("working!");
+            $(this).find(":input").filter(function(){ return !this.value; }).attr("disabled", "disabled");
+            return true; // ensure form still submits
+        });
+        
+
+        $( "form" ).find( ":input" ).prop( "disabled", false );
+    </script>
+    <script>
       var map;
       function initMap() {
         map = new google.maps.Map(document.getElementById('googlemaps'), {
@@ -56,6 +79,6 @@
         });
       }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCS02tQl70x2n9kHw5w6XkFNxkdP_bJa_Q&callback=initMap"
-    async defer></script>
+    {% comment %} <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCS02tQl70x2n9kHw5w6XkFNxkdP_bJa_Q&callback=initMap" {% endcomment %}
+    {% comment %} async defer></script> {% endcomment %}
 {% endblock %}
