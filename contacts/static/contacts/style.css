@@ -1,20 +1,25 @@
 .navbar {
-  -webkit-box-shadow: 0 8px 6px -6px black;
-  -moz-box-shadow: 0 8px 6px -6px black;
-  box-shadow: 0 8px 6px -6px black;
+  -webkit-box-shadow: 0 8px 6px -6px #403500;
+  -moz-box-shadow: 0 8px 6px -6px #403500;
+  box-shadow: 0 8px 6px -6px #403500;
 }
 
 #content > .jumbotron {
   border-radius: 0;
-  -webkit-box-shadow: inset 0 -8px 6px -6px black;
-  -moz-box-shadow: inset 0 -8px 6px -6px black;
-  box-shadow: inset 0 -8px 6px -6px black;
+  -webkit-box-shadow: inset 0 -8px 6px -6px #403500;
+  -moz-box-shadow: inset 0 -8px 6px -6px #403500;
+  box-shadow: inset 0 -8px 6px -6px #403500;
+  height: 75vh;
+  z-index: 0;
+  background-color: transparent !important;
 }
 
 #googlemaps {
   width: 100%;
   position: absolute;
-  z-index: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
 }
 
 #filter {
@@ -27,5 +32,9 @@
 }
 
 .card-title {
-  text-shadow: 1px 1px black;
+  text-shadow: 1px 1px #403500;
+}
+
+#contacts .card-body i.fas {
+  color: #806a00;
 }

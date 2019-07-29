@@ -3,26 +3,38 @@
 }
 
 .active {
-  color: #4d6066 !important;
+  color: #6c7a89 !important;
 }
 
 .breadcrumb-item + .breadcrumb-item::before {
   content: ">" !important;
-  color: #4d6066;
+  color: #6c7a89;
 }
 
 .bg-style {
-  background-color: #FFFE7E !important;
+  background-color: #ffd400 !important;
 }
 
 body {
-  color: #002517;
+  color: #403500;
 }
 
 a {
-  color: #1e824c;
+  color: #406bff;
 }
 
-a:hover, a:focus {
-  color: #4b7b4b;
+a:hover,
+a:focus {
+  color: #146ecc;
+}
+
+.btn-primary {
+  background-color: #406bff;
+  border-color: #406bff;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #146ecc;
+  border-color: #146ecc;
 }
